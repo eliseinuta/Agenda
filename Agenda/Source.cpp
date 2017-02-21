@@ -413,13 +413,14 @@ void Menu()
 	{
 		case '1': PrintPersons();
 		break;
-		case '2': InsertPersonAlphabetically(CreatePerson(ReadAdress(), ReadPhoneNumber(), ReadName()));
+		case '2': InsertPersonAlphabetically\
+			(CreatePerson(ReadAdress(), ReadPhoneNumber(), ReadName()));
 		break;
 		case '3': DeletePerson(ReadName());
 		break;
-		case '4': SearchPersonByName();
+		case '4': SearchPersonByName(ReadName());
 		break;
-		case '5': SearchPersonByPhoneNumber();
+		case '5': SearchPersonByPhoneNumber(ReadPhoneNumber());
 		break;
 		case '6': SavePersonsToFile();
 		break;
