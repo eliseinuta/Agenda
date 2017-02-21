@@ -99,119 +99,98 @@ person* CreatePerson(char personName[], char personPhoneNumber[], char personAdr
 	strcpy_s(newPerson->address, personAdress);
 	newPerson->next = NULL;
 	return newPerson;
-	}
-
-/*void AddPerson(person* newPerson)
- {
- 	if(start==NULL)
- 		start=newPerson;
- 	else
- 	{
- 		person *p = start;
- 		while (p->next!=NULL)
- 		{
- 			p=p->next;
- 		}
- 		p->next=newPerson;
- 	}
- }*/
+}
 	
 void PrintPersons()
-	 {
+{
 	if (start == NULL)
-		 {
+	{
 		cout << "No entries\n\n";
 		return;
-		}
+	}
 	
-		
-		person *p = start;
+	person *p = start;
 	int x = 1;
 	while (p != NULL)
-		 {
+	{
 		cout << "Entry #" << x << "\n";
 		cout << "Name: " << p->name << "\nPhone Number: " << p->phoneNumber << "\nAddress: " << p->address << "\n\n";
 		cout << endl;
 		p = p->next;
 		x++;
-		}
-	cout << "\n\n";
 	}
+	cout << "\n\n";
+}
 
 void InsertPersonAlphabetically(person* newPerson)
- {
+{
 	int position = 2;
 	
-		if (start == NULL)										//When there are no persons
-		 {
+	if (start == NULL)										//When there are no persons
+	{
 		start = newPerson;
 		return;
-		}
+	}
+
+	person *p = start;
 	
-		person *p = start;
-	
-		if (start->next == NULL)								 //When there is only one person
-		 {
+	if (start->next == NULL)								 //When there is only one person
+	{
 		int x = strcmp(newPerson->name, start->name);				//Compare newPerson and start
 		
-			if (x >= 0)													//When new goes after start
-			 {
+		if (x >= 0)													//When new goes after start
+		{
 			start->next = newPerson;
-			}
+		}
 		
-			if (x < 0)													//When new goes before start
-			 {
+		if (x < 0)													//When new goes before start
+		{
 			start = newPerson;
 			start->next = p;
-			}
-		
-			return;
 		}
+		
+		return;
+	}
 	
-		
-		
-		
-		else													//When there are more than 2 persons
-		 {
+	else													//When there are more than 2 persons
+	{
 		person *q = p->next;
 		
-			int x = (strcmp(newPerson->name, start->name));			//Compare newPerson and start
+		int x = (strcmp(newPerson->name, start->name));			//Compare newPerson and start
 		
-			if (x<0)												//When new goes before start
-			 {
-				start = newPerson;
-				start->next = p;
-				return;
-			}
+		if (x<0)												//When new goes before start
+		{
+			start = newPerson;
+			start->next = p;
+			return;
+		}
 		
 			
-			while (position > 0 && q != NULL)							//Move p and q until new person goes between or q is NULL
-			 {
+		while (position > 0 && q != NULL)							//Move p and q until new person goes between or q is NULL
+		{
+			p = p->next;
+			q = q->next;
 			
-				p = p->next;
-				q = q->next;
-			
-				
-				if (q == NULL)
-				{
-					break;
-				}
-			
-				position = strcmp(newPerson->name, q->name);
-			}
-		
 			if (q == NULL)
-			 {
-			p->next = newPerson;
+			{
+				break;
 			}
+			
+			position = strcmp(newPerson->name, q->name);
+		}
+		
+		if (q == NULL)
+		{
+			p->next = newPerson;
+		}
 		else
-			 {
+		{
 			newPerson->next = q;
 			p->next = newPerson;
-			}
 		}
+	}
 	
-		}
+}
 
 void DeletePerson(char nameToDelete[])
 {
@@ -227,119 +206,105 @@ void DeletePerson(char nameToDelete[])
 	}
 	
 	if (start->next == NULL)			//When there is only one entry
-		 {
-			x = strcmp(nameToDelete, start->name);
-			if (x == 0)
-				 {
-				start = NULL;
-				cout << "Person deleted successfully\n\n";
-				return;
-				}
+	{
+		x = strcmp(nameToDelete, start->name);
+		if (x == 0)
+		{
+			start = NULL;
+			cout << "Person deleted successfully\n\n";
+			return;
+		}
+		cout << "\nPerson not found\n\n";
+		return;
+	}
+	
+	y = strcmp(nameToDelete, start->name);
+
+	if (y == 0)
+	{
+		person *de = start;
+		start = q;
+		de = NULL;
+		p = q;
+		q = p->next;
+		cout << "\nPerson deleted successfully\n\n";
+		return;
+	}
+	
+		
+	while (x != 0)
+	{
+		if (q != NULL)
+		{
+			x = strcmp(nameToDelete, q->name);
+		}
+		if ((q == NULL) && (p != start))
+		{
 			cout << "\nPerson not found\n\n";
 			return;
 		}
-	
-		y = strcmp(nameToDelete, start->name);
-	
-		if (y == 0)
-		 {
-			person *de = start;
-			start = q;
-			de = NULL;
-			p = q;
-			q = p->next;
-			cout << "\nPerson deleted successfully\n\n";
-			return;
 		
-			}
-	
-		
-		while (x != 0)
-		 {
-		if (q != NULL)
-			 {
-			x = strcmp(nameToDelete, q->name);
-			}
-		if ((q == NULL) && (p != start))
-			 {
-			cout << "\nPerson not found\n\n";
-			return;
-			}
-		
-			if (x != 0)
-			 {
+		if (x != 0)
+		{
 			p = p->next;
 			q = q->next;
-			}
 		}
+	}
 	
-		if (q->next == NULL)				//When the name to delete is the last entry
-		 {
+	if (q->next == NULL)				//When the name to delete is the last entry
+	{
 		q = NULL;
 		p->next = NULL;
 		cout << "\nPerson deleted successfully\n\n";
 		return;
-		}
+	}
 	
-		person *d = q;
+	person *d = q;
 	q = q->next;				//When the person to delete is between 2 other persons
 	p->next = q;
 	d = NULL;
-	cout << "\nPerson deleted successfully\n\n";
-	
-		
-		
-		
+	cout << "\nPerson deleted successfully\n\n";		
 }
-
-person* GetNameToDelete()
- {
-	person* nameToDelete = new person;
-	cout << "Insert name of the person to delete: ";
-	cin.getline(nameToDelete->name, MAX_NAME_LENGTH - 1, '\n');
-	return nameToDelete;
-	}
 
 void LoadPersonsFromFile()
 {
 	ifstream fin("Agenda.txt");
 	bool x = fin.eof();
 	while (x == false)
-		 {
+	{
 		person* readPerson = new person;
 		
-			fin.getline(readPerson->name, MAX_NAME_LENGTH);
+		fin.getline(readPerson->name, MAX_NAME_LENGTH);
 		fin >> readPerson->phoneNumber;
 		fin.ignore();
 		fin.getline(readPerson->address, MAX_ADDRESS_LENGTH);
 		readPerson->next = NULL;
 		
-			if (start == NULL)
-			 {
+		if (start == NULL)
+		{
 			start = readPerson;
-			}
+		}
 		
-			else
-			 {
+		else
+		{
 			person *p = start;
 			
-				while (p->next != NULL)
-				 {
+			while (p->next != NULL)
+			{
 				p = p->next;
-				}
-			p->next = readPerson;
 			}
+			p->next = readPerson;
+		}
 		x = fin.eof();
 		}
 	fin.close();
-	}
+}
 
 void SavePersonsToFile()
- {
+{
 	ofstream fout("Agenda.txt");
 
-	
-		person *p = start;
+	person *p = start;
 	while (p != NULL)
 	{
 		if (p->next == NULL)
@@ -348,103 +313,89 @@ void SavePersonsToFile()
 			p = NULL;
 		}
 		else
-			 {
+		{
 			fout << p->name << "\n" << p->phoneNumber << "\n" << p->address << "\n";
 			p = p->next;
-			}
+		}
 		
 	}
 	fout.close();
-	}
+}
 
-void SearchPersonByName()
- {
-	char nameToSearch[MAX_NAME_LENGTH];
-	cout << "Insert name to search: ";
-	cin.ignore();
-	cin.getline(nameToSearch, MAX_NAME_LENGTH - 1, '\n');
-
+void SearchPersonByName(char name[])
+{
 	person *p = start;
 	
-		int x = strcmp(nameToSearch, p->name);
+	int x = strcmp(name, p->name);
 	
-		while (x != 0 && p != NULL)
-		 {
+	while (x != 0 && p != NULL)
+	{
 		p = p->next;
-		x = strcmp(nameToSearch, p->name);
-		}
+		x = strcmp(name, p->name);
+	}
 	
-		if (p == NULL)
-		 {
+	if (p == NULL)
+	{
 		cout << "Person not found\n\n";
 		return;
-		}
-	
-		cout << "Name: " << p->name << "\nPhone Number: " << p->phoneNumber << "\nAddress: " << p->address << "\n\n";
 	}
+	
+	cout << "Name: " << p->name << "\nPhone Number: " << p->phoneNumber << "\nAddress: " << p->address << "\n\n";
+}
 
-void SearchPersonByPhoneNumber()
- {
-	char phoneNumberToSearch[MAX_NAME_LENGTH];
-	cout << "Insert phone number to search: ";
-	cin.ignore();
-	cin.getline(phoneNumberToSearch, MAX_NUMBER_LENGTH, '\n');
-	
-		person *p = start;
-	
-		int x = strcmp(phoneNumberToSearch, p->phoneNumber);
-	
-		while (x != 0 && p != NULL)
-		 {
+void SearchPersonByPhoneNumber(char phoneNumber[])
+{
+	person *p = start;
+	int x = strcmp(phoneNumber, p->phoneNumber);
+
+	while (x != 0 && p != NULL)
+	{
 		p = p->next;
-		x = strcmp(phoneNumberToSearch, p->phoneNumber);
+		x = strcmp(phoneNumber, p->phoneNumber);
 	}
 
 	if (p == NULL)
-		 {
+	{
 		cout << "Person not found\n\n";
 		return;
-		}
-	
-		cout << "Name: " << p->name << "\nPhone Number: " << p->phoneNumber << "\nAddress: " << p->address << "\n\n";
 	}
 
+	cout << "Name: " << p->name << "\nPhone Number: " << p->phoneNumber << "\nAddress: " << p->address << "\n\n";
+}
+
 void MenuOneCharValidation(char* option)
- {
+{
 	*option = getchar();
 	
-		if ('\n' != getchar())
-		 {
-		while ('\n' != getchar());
-		cout << "Option not found\nChoose action: ";
-		MenuOneCharValidation(option);
-		}
+	if ('\n' != getchar())
+	{
+	while ('\n' != getchar());
+	cout << "Option not found\nChoose action: ";
+	MenuOneCharValidation(option);
+	}
 	
-		}
+}
 
 int MenuOptionValidation(char* option, char* validOptions)
- {
+{
 	MenuOneCharValidation(option);
 	
-		while (*validOptions)
-		 {
+	while (*validOptions)
+	{
 		if (*validOptions == *option)
 			 return 1;
 		
-			else
-			 validOptions++;
-		}
+		else
+			validOptions++;
+	}
 	return 0;
 	
-		}
-
-
+}
 
 void Menu()
  {
 	char option;
-	
-		char validOptions[7] = "123456";
+	char validOptions[7] = "123456";
 	
 	cout << "1 = Print list\n";
 	cout << "2 = Insert Person Alphabetically\n";
@@ -454,12 +405,12 @@ void Menu()
 	cout << "6 = Save to file\n\n";
 	cout << "Choose action: ";
 	while (!MenuOptionValidation(&option, validOptions))
-		 {
+	{
 		cout << "Option not found\nChoose action: ";
-		}
+	}
 	cout << "\n\n";
 	switch (option)
-		{
+	{
 		case '1': PrintPersons();
 		break;
 		case '2': InsertPersonAlphabetically(CreatePerson(ReadAdress(), ReadPhoneNumber(), ReadName()));
@@ -474,7 +425,7 @@ void Menu()
 		break;
 		default: cout << "Option not found\nChoose action: ";
 		break;
-		}
+	}
 	
 		}
 
@@ -482,19 +433,17 @@ int main()
  {
 	start = NULL;
 	
-		LoadPersonsFromFile();
+	LoadPersonsFromFile();
 	
-		cout << "*****Phonebook*****\n\n";
+	cout << "*****Phonebook*****\n\n";
 	
-		while (true)
-		 {
+	while (true)
+	{
 		Menu();
-		}
-	
-		return 0;
 	}
-
-
+	
+	return 0;
+}
 
 /*	char x [16];
  	int y=0;
@@ -536,3 +485,18 @@ int main()
  			cout<<"Number = "<<y;
  		}
  	}*/
+
+/*void AddPerson(person* newPerson)
+{
+	if(start==NULL)
+		start=newPerson;
+	else
+	{
+		person *p = start;
+		while (p->next!=NULL)
+		{
+			p=p->next;
+		}
+		p->next=newPerson;
+	}
+}*/
