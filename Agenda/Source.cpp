@@ -393,7 +393,7 @@ int MenuOptionValidation(char* option, char* validOptions)
 }
 
 void Menu()
- {
+{
 	char option;
 	char validOptions[7] = "123456";
 	
