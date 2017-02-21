@@ -116,7 +116,7 @@ person* CreatePerson(char personName[], char personPhoneNumber[], char personAdr
  	}
  }*/
 	
-	void PrintPersons()
+void PrintPersons()
 	 {
 	if (start == NULL)
 		 {
@@ -213,7 +213,7 @@ void InsertPersonAlphabetically(person* newPerson)
 	
 		}
 
-void DeletePerson(person* nameToDelete)
+void DeletePerson(char nameToDelete[])
 {
 	person *p = start;
 	person *q = p->next;
@@ -228,7 +228,7 @@ void DeletePerson(person* nameToDelete)
 	
 	if (start->next == NULL)			//When there is only one entry
 		 {
-			x = strcmp(nameToDelete->name, start->name);
+			x = strcmp(nameToDelete, start->name);
 			if (x == 0)
 				 {
 				start = NULL;
@@ -239,7 +239,7 @@ void DeletePerson(person* nameToDelete)
 			return;
 		}
 	
-		y = strcmp(nameToDelete->name, start->name);
+		y = strcmp(nameToDelete, start->name);
 	
 		if (y == 0)
 		 {
@@ -258,7 +258,7 @@ void DeletePerson(person* nameToDelete)
 		 {
 		if (q != NULL)
 			 {
-			x = strcmp(nameToDelete->name, q->name);
+			x = strcmp(nameToDelete, q->name);
 			}
 		if ((q == NULL) && (p != start))
 			 {
@@ -464,7 +464,7 @@ void Menu()
 		break;
 		case '2': InsertPersonAlphabetically(CreatePerson(ReadAdress(), ReadPhoneNumber(), ReadName()));
 		break;
-		case '3': DeletePerson(GetNameToDelete());
+		case '3': DeletePerson(ReadName());
 		break;
 		case '4': SearchPersonByName();
 		break;
