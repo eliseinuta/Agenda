@@ -220,7 +220,13 @@ void DeletePerson(person* nameToDelete)
 	int x = -5;
 	int y = -5;
 	
-		if (start->next == NULL)			//When there is only one entry
+	if (start == NULL)			//When there is only one entry
+	{
+		cout << "\nThe list is empty\n\n";
+		return;
+	}
+	
+	if (start->next == NULL)			//When there is only one entry
 		 {
 			x = strcmp(nameToDelete->name, start->name);
 			if (x == 0)
