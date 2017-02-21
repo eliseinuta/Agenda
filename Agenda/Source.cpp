@@ -427,10 +427,10 @@ void Menu()
 		break;
 	}
 	
-		}
+}
 
 int main()
- {
+{
 	start = NULL;
 	
 	LoadPersonsFromFile();
