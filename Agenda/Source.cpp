@@ -220,7 +220,7 @@ void DeletePerson(person* nameToDelete)
 	int x = -5;
 	int y = -5;
 	
-	if (start == NULL)			//When there is only one entry
+	if (start == NULL)			//When list is empty
 	{
 		cout << "\nThe list is empty\n\n";
 		return;
