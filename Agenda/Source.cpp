@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int MAX_NAME_LENGTH = 50;
+const int MAX_NAME_LENGTH = 40;
 const int MAX_ADDRESS_LENGTH = 100;
 const int MAX_NUMBER_LENGTH = 15;
 
@@ -19,12 +19,35 @@ struct Person
 
 Person *start;
 
+bool validateName(char name[])
+{
+	if (strlen(name) > 30)
+	{
+
+		if (name[30] != '\n')
+		{
+			return false;
+		}
+	}
+
+	else
+		return true;
+}
 char* readName()
 {
-    char* name = new char[MAX_NAME_LENGTH];
-    cout << "Insert name: ";
-    cin.getline(name, MAX_NAME_LENGTH - 1, '\n');
-    return name;
+	char* name = new char[MAX_NAME_LENGTH];
+loop:    cout << "Insert name: ";
+	cin.getline(name, MAX_NAME_LENGTH - 1, '\n');
+
+	
+	if (!validateName(name))
+	{
+		cout<<"******Name too long******\n";
+		while ('\n' != getchar());
+		goto loop;
+	}
+	else
+			return name;
 }
 
 bool validatePhoneNumber(char phoneNumber[])
@@ -96,9 +119,9 @@ char* readAdress()
     return address;
 }
 
-Person* createPerson(char personName[],
+Person* createPerson(char personAdress[],
                      char personPhoneNumber[],
-                     char personAdress[])
+					 char personName[])
 {
     Person* newPerson = new Person;
     strcpy_s(newPerson->name, personName);
