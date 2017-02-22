@@ -108,6 +108,14 @@ Person* createPerson(char personName[],
     return newPerson;
 }
 
+void printPerson(Person* p)
+{
+	cout << "Name: " << p->name << "\n";
+	cout << "Phone Number: " << p->phoneNumber << "\n";
+	cout << "Address: " << p->address << "\n\n";
+	cout << endl;
+}
+
 void printPersons()
 {
     if (start == NULL)
@@ -121,12 +129,8 @@ void printPersons()
     while (p != NULL)
     {
         cout << "Entry #" << x << "\n";
-        cout << "Name: " << p->name << "\n";
-        cout << "Phone Number: " << p->phoneNumber << "\n";
-        cout << "Address: " << p->address << "\n\n";
-        cout << endl;
-
-        p = p->next;
+		printPerson(p);
+		p = p->next;
         x++;
     }
     cout << "\n\n";
@@ -358,10 +362,7 @@ void searchPersonByName(char name[])
         return;
     }
 
-    cout << "Name: " << p->name << "\n";
-    cout << "Phone Number: " << p->phoneNumber << "\n";
-    cout << "Address: " << p->address << "\n\n";
-    cout << endl;
+	printPerson(p);
 }
 
 void searchPersonByPhoneNumber(char phoneNumber[])
@@ -381,9 +382,7 @@ void searchPersonByPhoneNumber(char phoneNumber[])
         return;
     }
 
-    cout << "Name: " << p->name << "\n";
-    cout << "Phone Number: " << p->phoneNumber << "\n";
-    cout << "Address: " << p->address << "\n\n";
+	printPerson(p);
 }
 
 void menuOneCharValidation(char* option)
