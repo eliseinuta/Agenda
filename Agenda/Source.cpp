@@ -1,3 +1,4 @@
+#include "Functions.h"
 #include <stdio.h>
 #include <fstream>
 #include <string>
@@ -9,7 +10,7 @@ const int MAX_NAME_LENGTH = 30;
 const int MAX_ADDRESS_LENGTH = 100;
 const int MAX_NUMBER_LENGTH = 15;
 
-struct Person
+/*struct Person
 {
     char name[MAX_NAME_LENGTH];
     char phoneNumber[MAX_NUMBER_LENGTH];
@@ -306,29 +307,6 @@ void insertPersonAlphabetically(Person* newPerson)
 
 }
 
-/*char* checkForRepeatedNames (char nameToDelete [])
-{
-	Person* p = start;
-	int x;
-	int counter;
-	while (p!=NULL)
-	{
-		x = strcmp(nameToDelete,p->name);
-		if (x==0)
-		{
-			counter++;
-		}
-		p = p->next;
-	}
-	char listOfIdenticalName [MAX_NAME_LENGTH][counter]
-
-	if(x==0)
-	{
-
-	}
-
-}*/
-
 
 void deletePerson(char nameToDelete[])
 {
@@ -506,7 +484,7 @@ void searchPersonByPhoneNumber(char phoneNumber[])
     }
 
 	printPerson(p);
-}
+}*/
 
 void menuOneCharValidation(char* option)
 {
@@ -558,11 +536,7 @@ void menu()
     {
         case '1': printPersons();
         break;
-        case '2': insertPersonAlphabetically(
-                      createPerson(readAdress(),
-                                   readPhoneNumber(),
-                                   readName())
-                  );
+        case '2': insertPersonAlphabetically(createPerson(readAdress(),readPhoneNumber(),readName()));
         break;
         case '3': deletePerson(readName());
         break;
