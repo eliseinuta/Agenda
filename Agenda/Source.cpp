@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int MAX_NAME_LENGTH = 40;
+const int MAX_NAME_LENGTH = 30;
 const int MAX_ADDRESS_LENGTH = 100;
 const int MAX_NUMBER_LENGTH = 15;
 
@@ -21,42 +21,85 @@ Person *start;
 
 bool validateName(char name[])
 {
-	if (strlen(name) > 30)
+	if (strlen(name) > MAX_NAME_LENGTH)
 	{
-
-		if (name[30] != '\n')
-		{
-			return false;
-		}
+		while ('\n' != getchar());
+		cin.clear();
+		cout<<"******Name too long******\n";
+		return false;
 	}
 
 	else
 		return true;
 }
+bool avoidDuplicateName(char name[])
+{
+    Person* p = start;
+    while (p != NULL)
+    {
+        if (strcmp(p->name, name) == 0)
+        {
+            return false;
+        }
+
+        else
+        {
+            p = p->next;
+        }
+    }
+    return true;
+}
 char* readName()
 {
-	char* name = new char[MAX_NAME_LENGTH];
+	char* name = new char[MAX_NAME_LENGTH+2];
 loop:    cout << "Insert name: ";
-	cin.getline(name, MAX_NAME_LENGTH - 1, '\n');
+	cin.getline(name, MAX_NAME_LENGTH+2 , '\n');
 
 	
 	if (!validateName(name))
 	{
-		cout<<"******Name too long******\n";
-		while ('\n' != getchar());
 		goto loop;
 	}
-	else
-			return name;
+	
+	if (!avoidDuplicateName(name))
+    {
+        cout << "******Name already exists******\n";
+        goto loop;
+    }
+	
+	return name;
+}
+
+char* readNameForSearch()
+{
+	char* name = new char[MAX_NAME_LENGTH+2];
+loop:    cout << "Insert name: ";
+	cin.getline(name, MAX_NAME_LENGTH+2 , '\n');
+
+	
+	if (!validateName(name))
+	{
+		goto loop;
+	}
+	return name;
 }
 
 bool validatePhoneNumber(char phoneNumber[])
 {
     int i;
-    for (i = 0; i <= strlen(phoneNumber); i++)
+    
+	if (strlen(phoneNumber) > MAX_NUMBER_LENGTH)
+	{
+		while ('\n' != getchar());
+		cin.clear();
+		cout<<"******Number too long******\n";
+		return false;
+	}
+	
+	for (i = 0; i <= strlen(phoneNumber); i++)
     {
-        if (phoneNumber[i]>'0' &&
-            phoneNumber[i] <'9')
+        if (phoneNumber[i]>='0' &&
+            phoneNumber[i] <='9')
         {
             return true;
         }
@@ -67,7 +110,7 @@ bool validatePhoneNumber(char phoneNumber[])
         {
             return true;
         }
-
+		cout << "******Invalid phone number******\n";
         return false;
     }
 }
@@ -92,13 +135,12 @@ bool avoidDuplicatePhoneNumber(char phoneNumber[])
 
 char* readPhoneNumber()
 {
-    char* phoneNumber = new char[MAX_NUMBER_LENGTH];
+    char* phoneNumber = new char[MAX_NUMBER_LENGTH+2];
 
     loop: cout << "Insert phone number: ";
-    cin.getline(phoneNumber, MAX_NUMBER_LENGTH - 1, '\n');
+    cin.getline(phoneNumber, MAX_NUMBER_LENGTH+2, '\n');
     if (!validatePhoneNumber(phoneNumber))
     {
-        cout << "******Invalid phone number******\n";
         goto loop;
     }
 
@@ -111,11 +153,43 @@ char* readPhoneNumber()
 
 }
 
+char* readPhoneNumberForSearch()
+{
+    char* phoneNumberForSearch = new char[MAX_NUMBER_LENGTH+2];
+
+    loop: cout << "Insert phone number: ";
+    cin.getline(phoneNumberForSearch, MAX_NUMBER_LENGTH+2, '\n');
+    if (!validatePhoneNumber(phoneNumberForSearch))
+    {
+        goto loop;
+    }
+    return phoneNumberForSearch;
+
+}
+
+bool validateAddress (char address [])
+{
+	if (strlen(address) > MAX_ADDRESS_LENGTH)
+		{
+			while ('\n' != getchar());
+			cin.clear();
+			cout<<"******Address too long******\n";
+			return false;
+		}
+	else
+		return true;
+}
+
 char* readAdress()
 {
-    char* address = new char[MAX_ADDRESS_LENGTH];
-    cout << "Insert address: ";
-    cin.getline(address, MAX_ADDRESS_LENGTH - 1, '\n');
+    char* address = new char[MAX_ADDRESS_LENGTH+2];
+loop:    cout << "Insert address: ";
+    cin.getline(address, MAX_ADDRESS_LENGTH+2, '\n');
+	if (!validateAddress(address))
+	{
+		goto loop;
+	}
+
     return address;
 }
 
@@ -232,18 +306,44 @@ void insertPersonAlphabetically(Person* newPerson)
 
 }
 
+/*char* checkForRepeatedNames (char nameToDelete [])
+{
+	Person* p = start;
+	int x;
+	int counter;
+	while (p!=NULL)
+	{
+		x = strcmp(nameToDelete,p->name);
+		if (x==0)
+		{
+			counter++;
+		}
+		p = p->next;
+	}
+	char listOfIdenticalName [MAX_NAME_LENGTH][counter]
+
+	if(x==0)
+	{
+
+	}
+
+}*/
+
+
 void deletePerson(char nameToDelete[])
 {
-    Person *p = start;
-    Person *q = p->next;
-    int x = -5;
-    int y = -5;
-    // When list is empty
+       // When list is empty
     if (start == NULL)
     {
         cout << "\nThe list is empty\n\n";
         return;
     }
+	
+	Person *p = start;
+    Person *q = p->next;
+    int x = -5;
+    int y = -5;
+
     // When there is only one entry
     if (start->next == NULL)
     {
@@ -466,9 +566,9 @@ void menu()
         break;
         case '3': deletePerson(readName());
         break;
-        case '4': searchPersonByName(readName());
+        case '4': searchPersonByName(readNameForSearch());
         break;
-        case '5': searchPersonByPhoneNumber(readPhoneNumber());
+        case '5': searchPersonByPhoneNumber(readPhoneNumberForSearch());
         break;
         case '6': savePersonsToFile();
         break;
