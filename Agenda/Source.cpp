@@ -1,4 +1,3 @@
-#include "Functions.h"
 #include <stdio.h>
 #include <fstream>
 #include <string>
@@ -6,9 +5,9 @@
 
 using namespace std;
 
-const int MAX_NAME_LENGTH = 30;
-const int MAX_ADDRESS_LENGTH = 100;
-const int MAX_NUMBER_LENGTH = 15;
+const int MAX_NAME_LENGTH = 21;
+const int MAX_ADDRESS_LENGTH = 41;
+const int MAX_NUMBER_LENGTH = 16;
 
 struct Person
 {
@@ -22,6 +21,11 @@ Person *start;
 
 bool validateName(char name[])
 {
+	if (strlen(name) == MAX_NAME_LENGTH)
+	{
+		cout<<"******Name too long******\n";
+		return false;
+	}
 	if (strlen(name) > MAX_NAME_LENGTH)
 	{
 		while ('\n' != getchar());
@@ -52,9 +56,9 @@ bool avoidDuplicateName(char name[])
 }
 char* readName()
 {
-	char* name = new char[MAX_NAME_LENGTH+2];
+	char* name = new char[MAX_NAME_LENGTH+1];
 loop:    cout << "Insert name: ";
-	cin.getline(name, MAX_NAME_LENGTH+2 , '\n');
+	cin.getline(name, MAX_NAME_LENGTH+1 , '\n');
 
 	
 	if (!validateName(name))
@@ -73,9 +77,9 @@ loop:    cout << "Insert name: ";
 
 char* readNameForSearch()
 {
-	char* name = new char[MAX_NAME_LENGTH+2];
+	char* name = new char[MAX_NAME_LENGTH+1];
 loop:    cout << "Insert name: ";
-	cin.getline(name, MAX_NAME_LENGTH+2 , '\n');
+	cin.getline(name, MAX_NAME_LENGTH+1 , '\n');
 
 	
 	if (!validateName(name))
@@ -88,7 +92,11 @@ loop:    cout << "Insert name: ";
 bool validatePhoneNumber(char phoneNumber[])
 {
     int i;
-    
+    if (strlen(phoneNumber) == MAX_NUMBER_LENGTH)
+	{
+		cout<<"******Number too long******\n";
+		return false;
+	}
 	if (strlen(phoneNumber) > MAX_NUMBER_LENGTH)
 	{
 		while ('\n' != getchar());
@@ -136,10 +144,10 @@ bool avoidDuplicatePhoneNumber(char phoneNumber[])
 
 char* readPhoneNumber()
 {
-    char* phoneNumber = new char[MAX_NUMBER_LENGTH+2];
+    char* phoneNumber = new char[MAX_NUMBER_LENGTH+1];
 
     loop: cout << "Insert phone number: ";
-    cin.getline(phoneNumber, MAX_NUMBER_LENGTH+2, '\n');
+    cin.getline(phoneNumber, MAX_NUMBER_LENGTH+1, '\n');
     if (!validatePhoneNumber(phoneNumber))
     {
         goto loop;
@@ -156,10 +164,10 @@ char* readPhoneNumber()
 
 char* readPhoneNumberForSearch()
 {
-    char* phoneNumberForSearch = new char[MAX_NUMBER_LENGTH+2];
+    char* phoneNumberForSearch = new char[MAX_NUMBER_LENGTH+1];
 
     loop: cout << "Insert phone number: ";
-    cin.getline(phoneNumberForSearch, MAX_NUMBER_LENGTH+2, '\n');
+    cin.getline(phoneNumberForSearch, MAX_NUMBER_LENGTH+1, '\n');
     if (!validatePhoneNumber(phoneNumberForSearch))
     {
         goto loop;
@@ -170,6 +178,11 @@ char* readPhoneNumberForSearch()
 
 bool validateAddress (char address [])
 {
+	if (strlen(address) == MAX_ADDRESS_LENGTH)
+		{
+			cout<<"******Address too long******\n";
+			return false;
+		}
 	if (strlen(address) > MAX_ADDRESS_LENGTH)
 		{
 			while ('\n' != getchar());
@@ -183,9 +196,9 @@ bool validateAddress (char address [])
 
 char* readAdress()
 {
-    char* address = new char[MAX_ADDRESS_LENGTH+2];
+    char* address = new char[MAX_ADDRESS_LENGTH+1];
 loop:    cout << "Insert address: ";
-    cin.getline(address, MAX_ADDRESS_LENGTH+2, '\n');
+    cin.getline(address, MAX_ADDRESS_LENGTH+1, '\n');
 	if (!validateAddress(address))
 	{
 		goto loop;
