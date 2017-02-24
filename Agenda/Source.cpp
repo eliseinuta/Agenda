@@ -1,3 +1,4 @@
+#include "Functions.h"
 #include <stdio.h>
 #include <fstream>
 #include <string>
@@ -306,29 +307,6 @@ void insertPersonAlphabetically(Person* newPerson)
 
 }
 
-/*char* checkForRepeatedNames (char nameToDelete [])
-{
-	Person* p = start;
-	int x;
-	int counter;
-	while (p!=NULL)
-	{
-		x = strcmp(nameToDelete,p->name);
-		if (x==0)
-		{
-			counter++;
-		}
-		p = p->next;
-	}
-	char listOfIdenticalName [MAX_NAME_LENGTH][counter]
-
-	if(x==0)
-	{
-
-	}
-
-}*/
-
 
 void deletePerson(char nameToDelete[])
 {
@@ -473,13 +451,13 @@ void searchPersonByName(char name[])
 
     int x = strcmp(name, p->name);
 
-    while (x != 0 && p != NULL)
+	while (x != 0 && p->next != NULL)
     {
         p = p->next;
         x = strcmp(name, p->name);
     }
-
-    if (p == NULL)
+	   x = strcmp(name, p->name);
+	if (p->next == NULL && x!= 0)
     {
         cout << "Person not found\n\n";
         return;
@@ -493,13 +471,14 @@ void searchPersonByPhoneNumber(char phoneNumber[])
     Person *p = start;
     int x = strcmp(phoneNumber, p->phoneNumber);
 
-    while (x != 0 && p != NULL)
+    while (x != 0 && p->next != NULL)
     {
         p = p->next;
         x = strcmp(phoneNumber, p->phoneNumber);
     }
+	x = strcmp(phoneNumber, p->phoneNumber);
 
-    if (p == NULL)
+    if (p->next == NULL && x!= 0)
     {
         cout << "Person not found\n\n";
         return;
@@ -564,7 +543,7 @@ void menu()
                                    readName())
                   );
         break;
-        case '3': deletePerson(readName());
+        case '3': deletePerson(readNameForSearch());
         break;
         case '4': searchPersonByName(readNameForSearch());
         break;
