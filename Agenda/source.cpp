@@ -1,8 +1,10 @@
 #include "person.h"
-#include "LinkedNode.h"
+#include "linkedlist.h"
+
 #include <stdio.h>
+#include <string.h>
+
 #include <fstream>
-#include <string>
 #include <iostream>
 
 using namespace std;
@@ -36,7 +38,7 @@ int menuOptionValidation(char* option, char* validOptions)
 
 }
 
-void menu(LinkedNode *start, LinkedNode *p)
+void menu(LinkedList *start, LinkedList *p)
 {
     char option;
     char validOptions[7] = "123456";
@@ -66,13 +68,13 @@ void menu(LinkedNode *start, LinkedNode *p)
             start, p);
         break;
     case '3':
-        deletePerson(readNameForSearch(), start, p);
+        deletePerson(readName(), start, p);
         break;
     case '4':
-        searchPersonByName(readNameForSearch(), p);
+        searchPersonByName(readName(), p);
         break;
     case '5':
-        searchPersonByPhoneNumber(readPhoneNumberForSearch(), p);
+        searchPersonByPhoneNumber(readPhoneNumber(), p);
         break;
     case '6':
         savePersonsToFile(p);
@@ -86,8 +88,8 @@ void menu(LinkedNode *start, LinkedNode *p)
 
 int main()
 {
-    LinkedNode *start, *p;
-    p = start = new LinkedNode;
+    LinkedList *start, *p;
+    p = start = new LinkedList;
     start = NULL;
 
     // loadPersonsFromFile(start,p);
