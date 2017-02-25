@@ -1,4 +1,4 @@
-#include "Person.h"
+#include "person.h"
 #include "LinkedNode.h"
 #include <stdio.h>
 #include <fstream>
@@ -13,9 +13,9 @@ void menuOneCharValidation(char* option)
 
     if ('\n' != getchar())
     {
-		while ('\n' != getchar());
-		cout << "Option not found\nChoose action: ";
-		menuOneCharValidation(option);
+        while ('\n' != getchar());
+        cout << "Option not found\nChoose action: ";
+        menuOneCharValidation(option);
     }
 
 }
@@ -27,7 +27,7 @@ int menuOptionValidation(char* option, char* validOptions)
     while (*validOptions)
     {
         if (*validOptions == *option)
-             return 1;
+            return 1;
 
         else
             validOptions++;
@@ -55,23 +55,30 @@ void menu(LinkedNode *start, LinkedNode *p)
     cout << "\n\n";
     switch (option)
     {
-        case '1': printPersons(start, p);
+    case '1':
+        printPersons(start, p);
         break;
-        case '2': insertPersonAlphabetically(
-                      createPerson(readAdress(),
-                                   readPhoneNumber(p),
-                                   readName(p)),
-                  start, p);
+    case '2':
+        insertPersonAlphabetically(
+            createPerson(readAdress(),
+                         readPhoneNumber(p),
+                         readName(p)),
+            start, p);
         break;
-        case '3': deletePerson(readNameForSearch(), start, p);
+    case '3':
+        deletePerson(readNameForSearch(), start, p);
         break;
-        case '4': searchPersonByName(readNameForSearch(), p);
+    case '4':
+        searchPersonByName(readNameForSearch(), p);
         break;
-        case '5': searchPersonByPhoneNumber(readPhoneNumberForSearch(), p);
+    case '5':
+        searchPersonByPhoneNumber(readPhoneNumberForSearch(), p);
         break;
-        case '6': savePersonsToFile(p);
+    case '6':
+        savePersonsToFile(p);
         break;
-        default: cout << "Option not found\nChoose action: ";
+    default:
+        cout << "Option not found\nChoose action: ";
         break;
     }
 
@@ -79,11 +86,11 @@ void menu(LinkedNode *start, LinkedNode *p)
 
 int main()
 {
-LinkedNode *start, *p;
-p = start = new LinkedNode;
-start = NULL;
+    LinkedNode *start, *p;
+    p = start = new LinkedNode;
+    start = NULL;
 
-   // loadPersonsFromFile(start,p);
+    // loadPersonsFromFile(start,p);
 
     cout << "*****Phonebook*****\n\n";
 

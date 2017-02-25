@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Person.h"
+#include "person.h"
 
 struct LinkedNode
 {
-	Person *person;
-	LinkedNode *next;
+    Person *person;
+    LinkedNode *next;
 };
 
 bool avoidDuplicateName(char name[], LinkedNode* p);

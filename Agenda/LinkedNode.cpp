@@ -1,5 +1,5 @@
 #include "LinkedNode.h"
-#include "Person.h"
+#include "person.h"
 
 #include <stdio.h>
 #include <fstream>
@@ -27,31 +27,33 @@ bool avoidDuplicateName(char name[], LinkedNode* p)
 
 char* readName(LinkedNode *p)
 {
-	char* name = new char[MAX_NAME_LENGTH+1];
-loop:    cout << "Insert name: ";
-	cin.getline(name, MAX_NAME_LENGTH+1 , '\n');
+    char* name = new char[MAX_NAME_LENGTH + 1];
+loop:
+    cout << "Insert name: ";
+    cin.getline(name, MAX_NAME_LENGTH + 1, '\n');
 
-	
-	if (!validateName(name))
-	{
-		goto loop;
-	}
-	
-	if (!avoidDuplicateName(name, p))
+
+    if (!validateName(name))
+    {
+        goto loop;
+    }
+
+    if (!avoidDuplicateName(name, p))
     {
         cout << "******Name already exists******\n";
         goto loop;
     }
-	
-	return name;
+
+    return name;
 }
 
 char* readPhoneNumber(LinkedNode *p)
 {
-    char* phoneNumber = new char[MAX_NUMBER_LENGTH+1];
+    char* phoneNumber = new char[MAX_NUMBER_LENGTH + 1];
 
-    loop: cout << "Insert phone number: ";
-    cin.getline(phoneNumber, MAX_NUMBER_LENGTH+1, '\n');
+loop:
+    cout << "Insert phone number: ";
+    cin.getline(phoneNumber, MAX_NUMBER_LENGTH + 1, '\n');
     if (!validatePhoneNumber(phoneNumber))
     {
         goto loop;
@@ -95,8 +97,8 @@ void printPersons(LinkedNode* start, LinkedNode* p)
     while (p != NULL)
     {
         cout << "Entry #" << x << "\n";
-		printPerson(p->person);
-		p = p->next;
+        printPerson(p->person);
+        p = p->next;
         x++;
     }
     cout << "\n\n";
@@ -109,7 +111,7 @@ void insertPersonAlphabetically(Person* newPerson, LinkedNode* start, LinkedNode
     // When there are no persons
     if (start == NULL)
     {
-		start->person = newPerson;
+        start->person = newPerson;
         return;
     }
 
@@ -121,12 +123,12 @@ void insertPersonAlphabetically(Person* newPerson, LinkedNode* start, LinkedNode
         // When new goes after start
         if (x >= 0)
         {
-			start->next->person = newPerson;
+            start->next->person = newPerson;
         }
         // When new goes before start
         if (x < 0)
         {
-			start->person = newPerson;
+            start->person = newPerson;
             start->next = p;
         }
 
@@ -135,11 +137,11 @@ void insertPersonAlphabetically(Person* newPerson, LinkedNode* start, LinkedNode
     // When there are more than 2 persons
     else
     {
-		LinkedNode *q = p->next;
+        LinkedNode *q = p->next;
         // Compare newPerson and start
         int x = (strcmp(newPerson->name, start->person->name));
         // When new goes before start
-        if (x<0)
+        if (x < 0)
         {
             start->person = newPerson;
             start->next = p;
@@ -166,10 +168,10 @@ void insertPersonAlphabetically(Person* newPerson, LinkedNode* start, LinkedNode
         }
         else
         {
-			LinkedNode *newNode;
-			newNode->person = newPerson;
+            LinkedNode *newNode;
+            newNode->person = newPerson;
 
-			newNode->next = q;
+            newNode->next = q;
             p->next = newNode;
         }
     }
@@ -179,14 +181,14 @@ void insertPersonAlphabetically(Person* newPerson, LinkedNode* start, LinkedNode
 
 void deletePerson(char nameToDelete[], LinkedNode *start, LinkedNode *p)
 {
-       // When list is empty
+    // When list is empty
     if (start == NULL)
     {
         cout << "\nThe list is empty\n\n";
         return;
     }
-	
-	LinkedNode *q = p->next;
+
+    LinkedNode *q = p->next;
     int x = -5;
     int y = -5;
 
@@ -206,7 +208,7 @@ void deletePerson(char nameToDelete[], LinkedNode *start, LinkedNode *p)
 
     y = strcmp(nameToDelete, start->person->name);
 
-    if (y == 0)		//When starts needs to be deleted
+    if (y == 0)     //When starts needs to be deleted
     {
         LinkedNode *del = start;
         start = q;
@@ -245,7 +247,7 @@ void deletePerson(char nameToDelete[], LinkedNode *start, LinkedNode *p)
         return;
     }
 
-	LinkedNode *d = q;
+    LinkedNode *d = q;
     // When the person to delete is between 2 other persons
     q = q->next;
     p->next = q;
@@ -259,24 +261,24 @@ void loadPersonsFromFile(LinkedNode *start, LinkedNode *p)
     bool x = fin.eof();
     while (x == false)
     {
-		LinkedNode *newNode = new LinkedNode;
-		Person* readPerson = new Person;
-		newNode->person = readPerson;
+        LinkedNode *newNode = new LinkedNode;
+        Person* readPerson = new Person;
+        newNode->person = readPerson;
         fin.getline(readPerson->name, MAX_NAME_LENGTH);
         fin >> readPerson->phoneNumber;
         fin.ignore();
         fin.getline(readPerson->address, MAX_ADDRESS_LENGTH);
-		newNode->next = NULL;
+        newNode->next = NULL;
 
         if (start == NULL)
         {
-			//start = new LinkedNode;
-			start->person = readPerson;
-			//start->next = NULL;
+            //start = new LinkedNode;
+            start->person = readPerson;
+            //start->next = NULL;
         }
 
         else
-		{
+        {
             while (p->next != NULL)
             {
                 p = p->next;
@@ -284,7 +286,7 @@ void loadPersonsFromFile(LinkedNode *start, LinkedNode *p)
             p->next = newNode;
         }
         x = fin.eof();
-	}
+    }
     fin.close();
 }
 
@@ -318,19 +320,19 @@ void searchPersonByName(char name[], LinkedNode *p)
 
     int x = strcmp(name, p->person->name);
 
-	while (x != 0 && p->next != NULL)
+    while (x != 0 && p->next != NULL)
     {
         p = p->next;
         x = strcmp(name, p->person->name);
     }
-	   x = strcmp(name, p->person->name);
-	if (p->next == NULL && x!= 0)
+    x = strcmp(name, p->person->name);
+    if (p->next == NULL && x != 0)
     {
         cout << "Person not found\n\n";
         return;
     }
 
-	printPerson(p->person);
+    printPerson(p->person);
 }
 
 void searchPersonByPhoneNumber(char phoneNumber[], LinkedNode *p)
@@ -342,13 +344,13 @@ void searchPersonByPhoneNumber(char phoneNumber[], LinkedNode *p)
         p = p->next;
         x = strcmp(phoneNumber, p->person->phoneNumber);
     }
-	x = strcmp(phoneNumber, p->person->phoneNumber);
+    x = strcmp(phoneNumber, p->person->phoneNumber);
 
-    if (p->next == NULL && x!= 0)
+    if (p->next == NULL && x != 0)
     {
         cout << "Person not found\n\n";
         return;
     }
 
-	printPerson(p->person);
+    printPerson(p->person);
 }
