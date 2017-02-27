@@ -12,7 +12,7 @@ using namespace std;
 // =========================== Unique Checkers =======================
 // TODO: Bad name. Names that return true or false should not have
 //       verbs in them. Should refator to something like : isUniqueName
-bool avoidDuplicateName(char name[], LinkedList* p)
+bool isUniqueName(char name[], LinkedList* p)
 {
     while (p != NULL)
     {
@@ -31,7 +31,7 @@ bool avoidDuplicateName(char name[], LinkedList* p)
 
 // TODO: Bad name. Names that return true or false should not have
 //       verbs in them. Should refator to something like : isUniquePhoneNr
-bool avoidDuplicatePhoneNumber(char phoneNumber[], LinkedList* p)
+bool isUniquePhoneNumber(char phoneNumber[], LinkedList* p)
 {
     while (p != NULL)
     {
@@ -61,7 +61,7 @@ loop:
         goto loop;
     }
 
-    if (!avoidDuplicateName(name, p))
+    if (!isUniqueName(name, p))
     {
         cout << "******Name already exists******\n";
         goto loop;
@@ -82,7 +82,7 @@ loop:
         goto loop;
     }
 
-    if (!avoidDuplicatePhoneNumber(phoneNumber, p))
+    if (!isUniquePhoneNumber(phoneNumber, p))
     {
         cout << "******Phone number already exists******\n";
         goto loop;
@@ -246,23 +246,24 @@ void deletePerson(char nameToDelete[], LinkedList *start, LinkedList *p)
 // ======================== File Storage ========================
 void loadPersonsFromFile(LinkedList *start, LinkedList *p)
 {
-    ifstream fin("Agenda.txt");
+    ifstream fin("AgendaRefactor.txt");
     bool x = fin.eof();
     while (x == false)
     {
         LinkedList *newNode = new LinkedList;
         Person* readPerson = new Person;
-        newNode->person = readPerson;
+
         fin.getline(readPerson->name, MAX_NAME_LENGTH);
         fin >> readPerson->phoneNumber;
         fin.ignore();
         fin.getline(readPerson->address, MAX_ADDRESS_LENGTH);
+		newNode->person = readPerson;
         newNode->next = NULL;
 
         if (start == NULL)
         {
             //start = new LinkedList;
-            start->person = readPerson;
+			start->person = newNode->person;
             //start->next = NULL;
         }
 
