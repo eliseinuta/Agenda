@@ -22,8 +22,6 @@ bool validatePhoneNumber(char[]);
 bool validateAddress(char[]);
 
 // ========== Readers ===========
-char* readName();
-char* readPhoneNumber();
 char* readAdress();
 
 // ========== Printer ===========
