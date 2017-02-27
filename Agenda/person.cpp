@@ -92,34 +92,6 @@ bool validateAddress(char address[])
 }
 
 // =============== Readers ========================
-char* readName()
-{
-    char* name = new char[MAX_NAME_LENGTH + 1];
-loop:
-    cout << "Insert name: ";
-    cin.getline(name, MAX_NAME_LENGTH + 1, '\n');
-
-    if (!validateName(name))
-    {
-        goto loop;
-    }
-    return name;
-}
-
-char* readPhoneNumber()
-{
-    char* phoneNumber = new char[MAX_NUMBER_LENGTH + 1];
-
-loop:
-    cout << "Insert phone number: ";
-    cin.getline(phoneNumber, MAX_NUMBER_LENGTH + 1, '\n');
-    if (!validatePhoneNumber(phoneNumber))
-    {
-        goto loop;
-    }
-    return phoneNumber;
-}
-
 char* readAdress()
 {
     char* address = new char[MAX_ADDRESS_LENGTH + 1];
