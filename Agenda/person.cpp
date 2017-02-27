@@ -92,7 +92,7 @@ bool validateAddress(char address[])
 }
 
 // =============== Readers ========================
-char* readName()
+/*char* readName()
 {
     char* name = new char[MAX_NAME_LENGTH + 1];
 loop:
@@ -104,9 +104,9 @@ loop:
         goto loop;
     }
     return name;
-}
+}*/
 
-char* readPhoneNumber()
+/*char* readPhoneNumber()
 {
     char* phoneNumber = new char[MAX_NUMBER_LENGTH + 1];
 
@@ -118,7 +118,7 @@ loop:
         goto loop;
     }
     return phoneNumber;
-}
+}*/
 
 char* readAdress()
 {
