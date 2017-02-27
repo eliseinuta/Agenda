@@ -4,8 +4,8 @@
 
 struct LinkedList
 {
-    Person *person = NULL;
-    LinkedList *next = NULL;
+    Person *person = 0;
+    LinkedList *next = 0;
 };
 
 // =========================== Unique Checkers =======================

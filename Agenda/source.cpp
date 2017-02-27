@@ -62,10 +62,9 @@ void menu(LinkedList *start, LinkedList *p)
         break;
     case '2':
         insertPersonAlphabetically(
-            createPerson(readAdress(),
-                         readPhoneNumber(p),
-                         readName(p)),
-            start, p);
+            createPerson(readAdress(), readPhoneNumber(p), readName(p)),
+            start, p
+        );
         break;
     case '3':
         deletePerson(readName(), start, p);
@@ -90,7 +89,7 @@ int main()
 {
     LinkedList *start, *p;
     p = start = new LinkedList;
-    start = NULL;
+    start = 0;
 
     // loadPersonsFromFile(start,p);
 

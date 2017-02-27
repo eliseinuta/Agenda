@@ -14,7 +14,7 @@ using namespace std;
 //       verbs in them. Should refator to something like : isUniqueName
 bool avoidDuplicateName(char name[], LinkedList* p)
 {
-    while (p != NULL)
+    while (p != 0)
     {
         if (strcmp(p->person->name, name) == 0)
         {
@@ -33,7 +33,7 @@ bool avoidDuplicateName(char name[], LinkedList* p)
 //       verbs in them. Should refator to something like : isUniquePhoneNr
 bool avoidDuplicatePhoneNumber(char phoneNumber[], LinkedList* p)
 {
-    while (p != NULL)
+    while (p != 0)
     {
         if (strcmp(p->person->phoneNumber, phoneNumber) == 0)
         {
@@ -98,14 +98,14 @@ void insertPersonAlphabetically(Person* newPerson, LinkedList* start, LinkedList
     int position = 2;
 
     // When there are no persons
-    if (start == NULL)
+    if (start == 0)
     {
         start->person = newPerson;
         return;
     }
 
     // When there is only one person
-    if (start->next == NULL)
+    if (start->next == 0)
     {
         // Compare newPerson and start
         int x = strcmp(newPerson->name, start->person->name);
@@ -137,13 +137,13 @@ void insertPersonAlphabetically(Person* newPerson, LinkedList* start, LinkedList
             return;
         }
 
-        // Move p and q until new person goes between or q is NULL
-        while (position > 0 && q != NULL)
+        // Move p and q until new person goes between or q is 0
+        while (position > 0 && q != 0)
         {
             p = p->next;
             q = q->next;
 
-            if (q == NULL)
+            if (q == 0)
             {
                 break;
             }
@@ -151,7 +151,7 @@ void insertPersonAlphabetically(Person* newPerson, LinkedList* start, LinkedList
             position = strcmp(newPerson->name, q->person->name);
         }
 
-        if (q == NULL)
+        if (q == 0)
         {
             p->next->person = newPerson;
         }
@@ -170,7 +170,7 @@ void insertPersonAlphabetically(Person* newPerson, LinkedList* start, LinkedList
 void deletePerson(char nameToDelete[], LinkedList *start, LinkedList *p)
 {
     // When list is empty
-    if (start == NULL)
+    if (start == 0)
     {
         cout << "\nThe list is empty\n\n";
         return;
@@ -181,12 +181,12 @@ void deletePerson(char nameToDelete[], LinkedList *start, LinkedList *p)
     int y = -5;
 
     // When there is only one entry
-    if (start->next == NULL)
+    if (start->next == 0)
     {
         x = strcmp(nameToDelete, start->person->name);
         if (x == 0)
         {
-            start = NULL;
+            start = 0;
             cout << "Person deleted successfully\n\n";
             return;
         }
@@ -200,7 +200,7 @@ void deletePerson(char nameToDelete[], LinkedList *start, LinkedList *p)
     {
         LinkedList *del = start;
         start = q;
-        del = NULL;
+        del = 0;
         p = q;
         q = p->next;
         cout << "\nPerson deleted successfully\n\n";
@@ -210,11 +210,11 @@ void deletePerson(char nameToDelete[], LinkedList *start, LinkedList *p)
 
     while (x != 0)
     {
-        if (q != NULL)
+        if (q != 0)
         {
             x = strcmp(nameToDelete, q->person->name);
         }
-        if ((q == NULL) && (p != start))
+        if ((q == 0) && (p != start))
         {
             cout << "\nPerson not found\n\n";
             return;
@@ -227,10 +227,10 @@ void deletePerson(char nameToDelete[], LinkedList *start, LinkedList *p)
         }
     }
     // When the name to delete is the last entry
-    if (q->next == NULL)
+    if (q->next == 0)
     {
-        q = NULL;
-        p->next = NULL;
+        q = 0;
+        p->next = 0;
         cout << "\nPerson deleted successfully\n\n";
         return;
     }
@@ -239,7 +239,7 @@ void deletePerson(char nameToDelete[], LinkedList *start, LinkedList *p)
     // When the person to delete is between 2 other persons
     q = q->next;
     p->next = q;
-    d = NULL;
+    d = 0;
     cout << "\nPerson deleted successfully\n\n";
 }
 
@@ -257,18 +257,18 @@ void loadPersonsFromFile(LinkedList *start, LinkedList *p)
         fin >> readPerson->phoneNumber;
         fin.ignore();
         fin.getline(readPerson->address, MAX_ADDRESS_LENGTH);
-        newNode->next = NULL;
+        newNode->next = 0;
 
-        if (start == NULL)
+        if (start == 0)
         {
             //start = new LinkedList;
             start->person = readPerson;
-            //start->next = NULL;
+            //start->next = 0;
         }
 
         else
         {
-            while (p->next != NULL)
+            while (p->next != 0)
             {
                 p = p->next;
             }
@@ -283,14 +283,14 @@ void savePersonsToFile(LinkedList *p)
 {
     ofstream fout("Agenda.txt");
 
-    while (p != NULL)
+    while (p != 0)
     {
-        if (p->next == NULL)
+        if (p->next == 0)
         {
             fout << p->person->name << "\n";
             fout << p->person->phoneNumber << "\n";
             fout << p->person->address;
-            p = NULL;
+            p = 0;
         }
         else
         {
@@ -311,13 +311,13 @@ void searchPersonByName(char name[], LinkedList *p)
 
     int x = strcmp(name, p->person->name);
 
-    while (x != 0 && p->next != NULL)
+    while (x != 0 && p->next != 0)
     {
         p = p->next;
         x = strcmp(name, p->person->name);
     }
     x = strcmp(name, p->person->name);
-    if (p->next == NULL && x != 0)
+    if (p->next == 0 && x != 0)
     {
         cout << "Person not found\n\n";
         return;
@@ -330,14 +330,14 @@ void searchPersonByPhoneNumber(char phoneNumber[], LinkedList *p)
 {
     int x = strcmp(phoneNumber, p->person->phoneNumber);
 
-    while (x != 0 && p->next != NULL)
+    while (x != 0 && p->next != 0)
     {
         p = p->next;
         x = strcmp(phoneNumber, p->person->phoneNumber);
     }
     x = strcmp(phoneNumber, p->person->phoneNumber);
 
-    if (p->next == NULL && x != 0)
+    if (p->next == 0 && x != 0)
     {
         cout << "Person not found\n\n";
         return;
@@ -349,14 +349,14 @@ void searchPersonByPhoneNumber(char phoneNumber[], LinkedList *p)
 // =========================== Printer ==========================
 void printPersons(LinkedList* start, LinkedList* p)
 {
-    if (start == NULL)
+    if (start == 0)
     {
         cout << "No entries\n\n";
         return;
     }
 
     int x = 1;
-    while (p != NULL)
+    while (p != 0)
     {
         cout << "Entry #" << x << "\n";
         printPerson(p->person);
