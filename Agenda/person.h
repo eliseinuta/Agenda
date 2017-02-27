@@ -12,9 +12,9 @@ struct Person
 };
 
 // ========== Constructor ===========
-Person* createPerson(char personAdress[],
-                     char personPhoneNumber[],
-                     char personName[]);
+Person* createPerson(char [],
+                     char [],
+                     char []);
 
 // ========== Validators ===========
 bool validateName(char[]);
