@@ -50,6 +50,7 @@ void menu(LinkedList *start, LinkedList *p)
     cout << "5 = Search Person by phone number\n";
     cout << "6 = Save to file\n\n";
     cout << "Choose action: ";
+
     while (!menuOptionValidation(&option, validOptions))
     {
         cout << "Option not found\nChoose action: ";
@@ -67,13 +68,13 @@ void menu(LinkedList *start, LinkedList *p)
         );
         break;
     case '3':
-        deletePerson(readName(), start, p);
+        deletePerson(readName(p), start, p);
         break;
     case '4':
-        searchPersonByName(readName(), p);
+        searchPersonByName(readName(p), p);
         break;
     case '5':
-        searchPersonByPhoneNumber(readPhoneNumber(), p);
+        searchPersonByPhoneNumber(readPhoneNumber(p), p);
         break;
     case '6':
         savePersonsToFile(p);
