@@ -1,16 +1,14 @@
 #pragma once
 
 #include "person.h"
-
 struct LinkedList
 {
-    Person *person = NULL;
-    LinkedList *next = NULL;
+    Person *person;
+    LinkedList *next;
 };
-
 // =========================== Unique Checkers =======================
-bool avoidDuplicateName(char[], LinkedList*);
-bool avoidDuplicatePhoneNumber(char[], LinkedList*);
+bool isUniqueName(char[], LinkedList*);
+bool isUniquePhoneNumber(char[], LinkedList*);
 
 // =========================== Readers ==========================
 char* readName(LinkedList*);
