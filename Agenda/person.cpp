@@ -7,14 +7,14 @@
 using namespace std;
 
 // =============== Constructor ========================
-Person* createPerson(char personAdress[],
+Person createPerson(char personAdress[],
                      char personPhoneNumber[],
                      char personName[])
 {
-    Person* newPerson = new Person;
-    strcpy_s(newPerson->name, personName);
-    strcpy_s(newPerson->phoneNumber, personPhoneNumber);
-    strcpy_s(newPerson->address, personAdress);
+    Person newPerson;
+    strcpy_s(newPerson.name, personName);
+    strcpy_s(newPerson.phoneNumber, personPhoneNumber);
+    strcpy_s(newPerson.address, personAdress);
     return newPerson;
 }
 
@@ -92,6 +92,34 @@ bool validateAddress(char address[])
 }
 
 // =============== Readers ========================
+char* readName()
+{
+    char* name = new char[MAX_NAME_LENGTH + 1];
+loop:
+    cout << "Insert name: ";
+    cin.getline(name, MAX_NAME_LENGTH + 1, '\n');
+
+    if (!validateName(name))
+    {
+        goto loop;
+    }
+    return name;
+}
+
+char* readPhoneNumber()
+{
+    char* phoneNumber = new char[MAX_NUMBER_LENGTH + 1];
+
+loop:
+    cout << "Insert phone number: ";
+    cin.getline(phoneNumber, MAX_NUMBER_LENGTH + 1, '\n');
+    if (!validatePhoneNumber(phoneNumber))
+    {
+        goto loop;
+    }
+    return phoneNumber;
+}
+
 char* readAdress()
 {
     char* address = new char[MAX_ADDRESS_LENGTH + 1];
@@ -107,10 +135,10 @@ loop:
 }
 
 // =============== Printer ========================
-void printPerson(Person* p)
+void printPerson(Person p)
 {
-    cout << "Name: " << p->name << "\n";
-    cout << "Phone Number: " << p->phoneNumber << "\n";
-    cout << "Address: " << p->address << "\n\n";
+    cout << "Name: " << p.name << "\n";
+    cout << "Phone Number: " << p.phoneNumber << "\n";
+    cout << "Address: " << p.address << "\n\n";
     cout << endl;
 }

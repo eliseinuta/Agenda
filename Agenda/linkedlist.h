@@ -1,30 +1,30 @@
 #pragma once
 
 #include "person.h"
-struct LinkedList
+struct LinkNode
 {
-    Person *person = 0;
-    LinkedList *next = 0;
+    Person person;
+    LinkNode *next;	
 };
 // =========================== Unique Checkers =======================
-bool isUniqueName(char[], LinkedList*);
-bool isUniquePhoneNumber(char[], LinkedList*);
+bool isUniqueName(char[], LinkNode* listStart);
+bool isUniquePhoneNumber(char[], LinkNode* listStart);
 
 // =========================== Readers ==========================
-char* readName(LinkedList*);
-char* readPhoneNumber(LinkedList*);
+char* readNameForInsert(LinkNode* listStart);
+char* readPhoneNumberForInsert(LinkNode* listStart);
 
 // ======================== Linked List Operations ========================
-void insertPersonAlphabetically(Person*, LinkedList*, LinkedList*);
-void deletePerson(char[], LinkedList*, LinkedList*);
+void insertPersonAlphabetically(LinkNode* &start, Person);
+void deletePerson(char[], LinkNode* &listStart);
 
 // ======================== File Storage ========================
-void loadPersonsFromFile(LinkedList*, LinkedList*);
-void savePersonsToFile(LinkedList*);
+void loadPersonsFromFile(LinkNode* &start);
+void savePersonsToFile(LinkNode* start);
 
 // =========================== Search ==========================
-void searchPersonByName(char[], LinkedList*);
-void searchPersonByPhoneNumber(char[], LinkedList *);
+void searchPersonByName(char[], LinkNode* start);
+void searchPersonByPhoneNumber(char[], LinkNode* start);
 
 // =========================== Printer ==========================
-void printPersons(LinkedList*, LinkedList*);
+void printPersons(LinkNode* start);
